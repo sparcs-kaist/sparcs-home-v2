@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "description": "SPARCS HOME backend server",
+  "keywords": [
+    "sparcs",
+    "kaist"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "module-alias": "^2.2.0",
+    "morgan": "^1.9.1"
+  },
+  "_moduleAliases": {
+    "__Configuration__": "",
+    "@morganConfig": "config/logger/morgan",
+    "__Application__": "",
+    "@app": "app",
+    "__Router__": "",
+    "@router": "route/router"
+  }
+}

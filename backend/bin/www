@@ -1,0 +1,67 @@
+#!/usr/bin/env node
+
+/*************************************************
+ * Application Entry Point
+ *    @description Entry Point
+ *    @author      lannstark
+ *************************************************/
+
+"use strict"
+
+
+/**
+ * Module aliasing 
+ */
+
+require("module-alias/register")
+
+
+// TODO : Configuration
+
+
+/**
+ * Web Server Application
+ */
+
+const app = require("@app")
+const http = require("http")
+
+
+/**
+ * Create HTTP Server
+ */
+
+const server = http.createServer(app)
+console.log("================ Starting SPARCS HOME ================")
+// TODO : port - configuration
+server.listen(10202, function() {
+  console.log("Server is running")
+})
+
+
+/**
+ * Graceful shutdown
+ */
+
+process.on("SIGINT", function() {
+  server.close(function(error) {
+    if (error) {
+      // TODO: error handling
+    }
+    
+    // TODO : close connection HERE if exists
+    // TODO : I did not decide yet using DB
+   
+    console.log("================ SPARCS HOME terminated ================")
+    process.exit(error ? 1 : 0)
+  })
+})
+
+
+/**
+ * process exit detect
+ */ 
+
+process.on("exit", function(code) {
+  console.log(`Process is shutdown by code ${code}`)
+})
