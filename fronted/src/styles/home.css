@@ -1,0 +1,140 @@
+@media (min-width: 600px) {
+  #r_view {
+    margin: 0px;
+  }
+  .welcome {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: url('./../static/black-and-white-lights-abstract-curves.jpg') no-repeat fixed center center;
+    background-size: cover;
+    padding: 0;
+  }
+  .centered {
+    width: 100%;
+    text-align: center;
+  }
+  .logo_home {
+    padding-top: 20vh;
+    display: inline-block;
+    width: 498px;
+    height: 174px;
+    background-size: cover;
+    margin: 0 auto;
+  }
+  .message {
+    padding-top: 1vh;
+    width: 70%;
+    margin: 0 auto;
+  }
+  h1 {
+    font-family: "Noto Sans", bold, !important;
+  }
+  #goto {
+    padding-top: 3vh;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .bottom {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    width: 240px;
+    left:0px;
+    right:0px;
+    bottom: 5vh;
+  }
+  #goto_button {
+    box-shadow: inset 0 0 0 2px #fff!important;
+    background: transparent none;
+    color: #fff;
+    text-shadow: none!important;
+    font-size: 1rem;
+    padding: .78571429em 1.5em;
+    text-transform: none;
+    font-weight: 700;
+    font-style: normal;
+    border: 1px;
+    border-radius: .2857rem;
+    cursor: pointer;
+  }
+  #goto_button:hover {
+    background-color: white;
+    color: black;
+  }
+  .linkto{
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #facebook, #github, #mail{
+    font-size: 50px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  #r_view {
+    margin: 0px;
+  }
+  .welcome {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: url('./../static/black-and-white-lights-abstract-curves.jpg') no-repeat fixed center center;
+    background-size: cover;
+    padding: 0;
+  }
+  .centered {
+    width: 100%;
+    text-align: center;
+  }
+  .logo_image {
+    display: inline-block;
+    padding-top: 17vh;
+    width: 70%;
+    height: 24.5%;
+    margin: 0 auto;
+  }
+  .message {
+    display: inline-block;
+    padding-top: 1vh;
+    margin: 0 auto;
+  }
+  #welcome_message {
+    text-align: center;
+    font-family: "Noto Sans", bold, !important;
+    font-size: 4vw;
+  }
+  #goto {
+    padding-top: 5vh;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .bottom {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    width: 240px;
+    left:0px;
+    right:0px;
+    bottom: 15vh;
+  }
+  #goto_button {
+    box-shadow: inset 0 0 0 2px #fff!important;
+    background: transparent none;
+    color: #fff;
+    text-shadow: none!important;
+    font-size: 1rem;
+  }
+  .linkto{
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #facebook, #github, #mail{
+    font-size: 40px;
+  }
+}

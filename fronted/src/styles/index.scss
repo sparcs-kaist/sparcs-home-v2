@@ -1,0 +1,83 @@
+#app {
+  font-family: 'Noto Sans', 'Avenir', Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+#sparcs_logo{
+  border-color: transparent;
+}
+#menu_header {
+  padding: 1em 1em;
+  z-index: 1300;
+  border: none !important;
+  background-color: rgba(0,0,0,1);
+}
+#r_view {
+  margin-top: 85px;
+  flex: 1;
+}
+#footer{
+  margin-top: 0px !important;
+}
+.logo {
+  margin-top: 12px;
+  width: 110px;
+  height: 39px;
+}
+.masthead.segment {
+  min-height: 300px;
+  padding: 1em 0em;
+}
+.masthead h1.ui.header {
+  margin-top: 1.5em;
+  margin-bottom: 0em;
+  font-family: 'Noto Sans';
+  font-size: 3em;
+  font-weight: normal;
+}
+.masthead h2 {
+  font-family: 'Noto Sans';
+  font-size: 1.7em;
+  font-weight: normal;
+}
+.ui.vertical.footer.segment {
+  margin: 5em 0em 0em;
+  padding: 2em 0em;
+}
+.ui.horizontal.link.list a.item {
+  font-weight: bold;
+  font-size: 1rem;
+}
+.ui.vertical.inverted.sidebar.menu.right,
+.hamburger {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .ui.sidebar {
+    transition: overlay 0.5s;
+  }
+  .ui.vertical.inverted.sidebar.menu.right,
+  .hamburger {
+    display: block !important;
+    z-index: 700;
+  }
+  .menu {
+    width: 100%;
+  }
+  #menu_header {
+    position: fixed;
+  }
+  #sparcs_logo {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -40%);
+  }
+  .ui.container .right.menu {
+    display: none !important;
+  }
+}
