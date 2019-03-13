@@ -1,2 +1,6 @@
 */**/*.swp
 */*.swp
+
+# local logging
+backend/error.log
+backend/out.log

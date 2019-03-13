@@ -1,0 +1,14 @@
+#!/bin/bash
+
+##################################################
+#                                                #
+#           SPARCS HOME Restart Script           #
+#               (for development)                #
+#                                                #
+##################################################
+
+SCRIPT_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+
+pm2 restart $ROOT_DIR/ecosystem.config.js
+echo "[INFO] Done restarting SPARCS HOME"
