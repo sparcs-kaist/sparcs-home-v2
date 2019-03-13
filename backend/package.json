@@ -17,9 +17,12 @@
   "_moduleAliases": {
     "__Configuration__": "",
     "@morganConfig": "config/logger/morgan",
+    "@config": "config/config",
     "__Application__": "",
     "@app": "app",
     "__Router__": "",
-    "@router": "route/router"
+    "@router": "route/router",
+    "__Util__": "",
+    "@portSanitizer": "util/port/portSanitizer"
   }
 }

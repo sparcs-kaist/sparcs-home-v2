@@ -16,7 +16,11 @@
 require("module-alias/register")
 
 
-// TODO : Configuration
+/**
+ * Global Configuration
+ */
+
+require("@config")
 
 
 /**
@@ -32,10 +36,9 @@ const http = require("http")
  */
 
 const server = http.createServer(app)
-console.log("================ Starting SPARCS HOME ================")
-// TODO : port - configuration
+log.info("================ Starting SPARCS HOME ================")
 server.listen(10202, function() {
-  console.log("Server is running")
+  log.info("Server is running")
 })
 
 
@@ -52,7 +55,7 @@ process.on("SIGINT", function() {
     // TODO : close connection HERE if exists
     // TODO : I did not decide yet using DB
    
-    console.log("================ SPARCS HOME terminated ================")
+    log.info("================ SPARCS HOME terminated ================")
     process.exit(error ? 1 : 0)
   })
 })
@@ -63,5 +66,5 @@ process.on("SIGINT", function() {
  */ 
 
 process.on("exit", function(code) {
-  console.log(`Process is shutdown by code ${code}`)
+  log.info(`Process is shutdown by code ${code}`)
 })
