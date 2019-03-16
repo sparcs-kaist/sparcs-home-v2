@@ -1,0 +1,29 @@
+#seminar-header {
+  margin-top: 85px;
+  background-image: url('./../static/mesh05.png');
+}
+
+#seminar-list {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+@media only screen and (max-width: 767px) {
+  .desktop-only {
+    display: none;
+  }
+  .ui.table:not(.unstackable) thead.desktop-only {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+.actions {
+  margin-top : 15px;
+  text-align: right;
+}
