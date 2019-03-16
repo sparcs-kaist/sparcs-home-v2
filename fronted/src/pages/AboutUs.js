@@ -1,7 +1,8 @@
 import React from "react"
 import "./../styles/aboutus.css"
 import what_image from "./../static/test.jpg"
-import Navigation from "./Navigation"
+import Navigation from "./components/Navigation"
+import Footer from "./components/Footer"
 
 const AboutUs = () => {
 
@@ -104,6 +105,7 @@ const AboutUs = () => {
       </div>
   	</div>
     </div>
+    <Footer />
     </div>
   )
 }
