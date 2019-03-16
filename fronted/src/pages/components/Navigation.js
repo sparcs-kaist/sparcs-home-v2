@@ -5,6 +5,7 @@ class Navigation extends Component {
 
   constructor (props) {
     super(props)
+
     this.handleSparcsLogoClick = this.handleSparcsLogoClick.bind(this)
     this.handleRightMenuClick = this.handleRightMenuClick.bind(this)
   }
@@ -12,15 +13,17 @@ class Navigation extends Component {
   // TODO : supplement click event of Logo - sidebar
 
   handleSparcsLogoClick(e) {
-    e.preventDefault()
-    document.getElementById('main-contents').style.marginTop = '0px'
-    document.getElementById('menu_header').style.backgroundColor = 'rgba(0,0,0,0)'
-    document.querySelectorAll('.right.menu .item').forEach((item) => {
-      item.classList.remove('active')
-    })
-
-    const width = window.innerWidth
-    console.log(width)
+    if (window.location.pathname === "/aboutus") {
+      e.preventDefault()
+      document.getElementById('main-contents').style.marginTop = '0px'
+      document.getElementById('menu_header').style.backgroundColor = 'rgba(0,0,0,0)'
+      document.querySelectorAll('.right.menu .item').forEach((item) => {
+        item.classList.remove('active')
+      })
+  
+      const width = window.innerWidth
+      console.log(width)
+    }
   }
 
   // TODO : right menu click event?
