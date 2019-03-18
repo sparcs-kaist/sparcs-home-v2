@@ -72,14 +72,15 @@ class Seminars extends Component {
       const seminar = {
         title: title,
         speaker: speaker,
-        result: this.state.fileResult,
-        date: Date.now()
+        content: this.state.fileResult,
       }
       console.log(seminar)
 
       // TODO axios call to upload file
       axios.post(config.serverURL + "seminar" , seminar)
       .then((response) => {
+
+        console.log(response)
       
       })
       .catch((error) => {
@@ -87,7 +88,9 @@ class Seminars extends Component {
       })
     } else {
       // If file is not ready to upload, retry uploadSeminar
-      this.uploadSeminar(null)
+      setTimeout(() => {
+        this.uploadSeminar(null)
+      }, 100)
     }
   }
 
