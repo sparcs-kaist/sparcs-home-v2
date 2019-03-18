@@ -32,32 +32,46 @@ const http = require("http")
 
 
 /**
- * Create HTTP Server
+ * Database
  */
 
-const server = http.createServer(app)
-log.info("================ Starting SPARCS HOME ================")
-server.listen(10202, function() {
-  log.info("Server is running")
-})
+global.db = require("@mysql")
+
+db.initiate()
+.then(() => {
 
 
-/**
- * Graceful shutdown
- */
-
-process.on("SIGINT", function() {
-  server.close(function(error) {
-    if (error) {
-      // TODO: error handling
-    }
-    
-    // TODO : close connection HERE if exists
-    // TODO : I did not decide yet using DB
-   
-    log.info("================ SPARCS HOME terminated ================")
-    process.exit(error ? 1 : 0)
+  /**
+   * Create HTTP Server
+   */
+  
+  const server = http.createServer(app)
+  log.info("================ Starting SPARCS HOME ================")
+  server.listen(10202, function() {
+    log.info("Server is running")
   })
+  
+  
+  /**
+   * Graceful shutdown
+   */
+  
+  process.on("SIGINT", function() {
+    server.close(function(error) {
+      if (error) {
+        // TODO: error handling
+      }
+     
+      db.closeConnection()
+     
+      log.info("================ SPARCS HOME terminated ================")
+      process.exit(error ? 1 : 0)
+    })
+  })
+
+})
+.catch((error) => {
+  log.error("Error")
 })
 
 
