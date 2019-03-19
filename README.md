@@ -1,6 +1,6 @@
 # SPARCS home Refactoring project
 
-참여자 : lannstark, yolo
+참여자 : lannstark, yolo, nick
 
 ## 프로젝트 목적
 
