@@ -7,6 +7,14 @@ import Navigation from "./components/Navigation"
 import Footer from "./components/Footer"
 import { config } from "../config/config"
 
+const uploadButtonStyle = {
+  color: "#fff"
+}
+uploadButtonStyle["background-color"] = "#db2828"
+uploadButtonStyle["text-shadow"] = "none"
+uploadButtonStyle["border-radius"] = "0"
+
+
 /**
  * Seminars
  */
@@ -17,7 +25,6 @@ class Seminars extends Component {
     super(props)
 
     this.state = {
-    
     }
 
     this.selectFile = this.selectFile.bind(this)
@@ -27,8 +34,22 @@ class Seminars extends Component {
 
 
   /**
+   * ComponentDidMount
+   */
+
+  componentDidMount() {
+    axios.get(config.serverURL + "seminar")
+    .then((response) => {
+      this.setState({
+        seminars: response.data.result
+      })
+    })
+  }
+
+
+  /**
    * selectFile
-   * @description 
+   * @description When user selects file, occur click event
    */
 
   selectFile() {
@@ -40,6 +61,7 @@ class Seminars extends Component {
 
   /**
    * changeFile
+   * @description Get binary file data using FileReader()
    */
 
   changeFile = (event) => {
@@ -62,29 +84,34 @@ class Seminars extends Component {
 
   /**
    * uploadSeminar
+   * @description Upload seminar to server
    */ 
 
   uploadSeminar(event) {
     const title = document.getElementById("seminar-title").value
     const speaker = document.getElementById("seminar-speaker").value
 
+    // When file is ready to upload, POST request
     if (this.state.fileResult) {
       const seminar = {
         title: title,
         speaker: speaker,
         content: this.state.fileResult,
       }
-      console.log(seminar)
 
-      // TODO axios call to upload file
+      // POST /seminar
       axios.post(config.serverURL + "seminar" , seminar)
       .then((response) => {
-
-        console.log(response)
-      
+        if (response.data.success) {
+          alert("Successfully upload a seminar file")
+        } else {
+          alert(`Failed to upload a seminar file. ${response.data.error}`)
+        }
+        window.location.href = "/seminars"
       })
       .catch((error) => {
-      
+        alert(`Failed to upload a seminar file. ${JSON.stringify(error)}`)
+        window.location.href = "/seminars"
       })
     } else {
       // If file is not ready to upload, retry uploadSeminar
@@ -95,14 +122,11 @@ class Seminars extends Component {
   }
 
 
-  // TODO upload nodal isSPARCS state 적용 (v-if), 컴포넌트로 따로 빼기
+  // TODO upload nodal  컴포넌트로 따로 빼기
+  // TODO 세미나 자료 한 줄을 컴포넌트로 따로 빼기
   // TODO modal style customizing without Warning
 
-  // TODO onClick event  (@click)
-
-  // TODO (v-for 렌더링)
-  //      세미나 렌더링 할 때 파일 타입에 따라 다른 아이콘 처리
-
+  // TODO Pagination, category별 찾기, 검색기능
 
   render() {
     return (
@@ -131,7 +155,7 @@ class Seminars extends Component {
               </div>
             </div>
 
-            <Modal trigger={<Button>Upload</Button>}>
+            <Modal trigger={<Button style={uploadButtonStyle}>Upload</Button>}>
               <Modal.Header>Upload a seminar</Modal.Header>
               <Modal.Content>
 
@@ -182,28 +206,29 @@ class Seminars extends Component {
             </tr>
             </thead>
 
-            <tbody>
-            <tr>
-              <td>날 짜</td>
-              <td>
-                제 목
-              </td>
-              <td>
-                <span>
-                  <a href="/">
-                    <i className="file powerpoint outline black icon"></i>
-                  </a>
-                  <a href="/">
-                    <i className="file pdf outline black icon"></i>
-                  </a>
-                </span>
-              </td>
-              <td>
-                <span className="desktop-only">세미나 연사</span>
-                <span className="mobile-only">Seminar by <b>세미나 연사</b></span>
-              </td>
-            </tr>
-            </tbody>
+            {this.state.seminars && this.state.seminars.map((seminar, i) => {
+              return (
+                <tbody key={i}>
+                <tr>
+                  <td>{seminar.created_date.substring(0, 10)}</td>
+                  <td>{seminar.title}</td>
+                  <td>
+                    <span>
+                      <a href={config.serverURL + "static/" + seminar.file_name}>
+                        {seminar.file_name.substr(seminar.file_name.length-3 ,3) === "pdf"
+                          ? <i className="file pdf outline black icon"></i>
+                          : <i className="file powerpoint outline black icon"></i>}
+                      </a>
+                    </span>
+                  </td>
+                  <td>
+                    <span className="desktop-only">{seminar.speaker}</span>
+                    <span className="mobile-only">Seminar by <b>{seminar.speaker}</b></span>
+                  </td>
+                </tr>
+                </tbody>
+              )
+            })}
 
           </table>
         </div>

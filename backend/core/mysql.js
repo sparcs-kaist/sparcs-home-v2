@@ -59,8 +59,26 @@ class Mysql {
    * @param {Function} callback
    */
 
-  createSeminar(title, speaker, callback) {
-    this.client(this.seminarTable).insert({ title: title, speaker: speaker })
+  createSeminar(title, speaker, fileName, callback) {
+    this.client(this.seminarTable).insert({ title: title, speaker: speaker, file_name: fileName})
+    .asCallback((error, result) => {
+      if (error) {
+        callback(error, null)
+      } else {
+        callback(null, result)
+      }
+    })
+  }
+
+
+  /**
+   * getSeminars
+   * @description Get seminar information in Mysql
+   * @param {Function} callback
+   */
+
+  getSeminars(callback) {
+    this.client.select().from(this.seminarTable)
     .asCallback((error, result) => {
       if (error) {
         callback(error, null)
@@ -73,6 +91,7 @@ class Mysql {
 
   /**
    * closeConnection
+   * @description Close connection to Mysql
    */
 
   closeConnection() {

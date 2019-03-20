@@ -52,7 +52,7 @@ router.post("", (req, res) => {
   }
 
   // Save information about seminar in DB
-  db.createSeminar(utitle, uspeaker, (error, result) => {
+  db.createSeminar(utitle, uspeaker, fileName, (error, result) => {
     if (error) {
       return res.json({ success: false, error: error })
     } else {
@@ -85,8 +85,25 @@ router.post("", (req, res) => {
 
 
 /**
+ * GET /seminars
+ * @description Return seminar lists in DB
+ */
+
+router.get("", (req, res) => {
+  // TODO : pagination
+  db.getSeminars((error, result) => {
+    if (error) {
+      return res.json({ success: false, error: error })
+    } else {
+      return res.json({ success: true, error: null, result: result})
+    }
+  })
+
+})
+
+
+/**
  * Module export
  */ 
 
 module.exports = router
-
