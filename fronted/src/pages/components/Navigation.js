@@ -1,5 +1,8 @@
 import React, { Component } from "react"
 import logo from "./../../static/logo-1@3x.png"
+import axios from "axios"
+import { config } from "../../config/config"
+
 
 class Navigation extends Component {
 
@@ -11,6 +14,7 @@ class Navigation extends Component {
   }
 
   // TODO : supplement click event of Logo - sidebar
+  // TODO : sidebar hamburger onclick
 
   handleSparcsLogoClick(e) {
     if (window.location.pathname === "/aboutus") {
@@ -21,8 +25,7 @@ class Navigation extends Component {
         item.classList.remove('active')
       })
   
-      const width = window.innerWidth
-      console.log(width)
+      // const width = window.innerWidth
     }
   }
 
@@ -31,7 +34,19 @@ class Navigation extends Component {
   handleRightMenuClick(e) {
   }
 
-  // TODO : sidebar hamburger onclick
+
+  /**
+   * handleLoginClick
+   */ 
+
+  handleLoginClick(e) {
+    const headers = { "Access-Control-Allow-Origin": "*" }
+    axios.post(config.serverURL + "auth/login")
+    .then((response) => {
+      console.log(response)
+    })
+  }
+
 
   // TODO : Login / Logout - change word depends on authentication, redirect to login/logout
 
@@ -45,7 +60,7 @@ class Navigation extends Component {
           <a href="/seminars" className="item" id="seminars" onClick={this.handleRightMenuClick}>SEMINARS</a>
           <a href="/album" className="item" id="album" onClick={this.handleRightMenuClick}>ALBUM</a>
           <a href="/members" className="item" id="members" onClick={this.handleRightMenuClick}>MEMBERS</a>
-          <div className="item">LOGIN</div>
+          <div className="item login" onClick={this.handleLoginClick}>LOGIN</div>
         </div>
 
         <div className="ui container">
@@ -60,7 +75,7 @@ class Navigation extends Component {
             <a href="/seminars" className="item" id="seminars" onClick={this.handleRightMenuClick}>SEMINARS</a>
             <a href="/album" className="item" id="album" onClick={this.handleRightMenuClick}>ALBUM</a>
             <a href="/members" className="item" id="members" onClick={this.handleRightMenuClick}>MEMBERS</a>
-            <div className="item">LOGIN</div>
+            <div className="item login" onClick={this.handleLoginClick}>LOGIN</div>
           </div>
           <div className="hamburger">
             <i className="sidebar icon" style={{color: "white"}}></i>

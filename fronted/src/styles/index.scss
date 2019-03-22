@@ -81,3 +81,10 @@
     display: none !important;
   }
 }
+
+.login {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}

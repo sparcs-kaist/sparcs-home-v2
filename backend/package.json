@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.422.0",
+    "axios": "^0.18.0",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.16.4",
     "helmet": "^3.16.0",
     "knex": "^0.16.3",
@@ -25,12 +27,15 @@
     "@morganConfig": "config/logger/morgan",
     "@config": "config/config",
     "@mysqlConfig": "config/mysql/config",
+    "@secretConfig": "config/secret/config",
     "__Application__": "",
     "@app": "app",
     "__Router__": "",
     "@router": "route/router",
     "@seminar": "route/seminar",
+    "@authentication": "route/authentication",
     "__Util__": "",
-    "@portSanitizer": "util/port/portSanitizer"
+    "@portSanitizer": "util/port/portSanitizer",
+    "@ssoClient": "util/sso/client"
   }
 }
