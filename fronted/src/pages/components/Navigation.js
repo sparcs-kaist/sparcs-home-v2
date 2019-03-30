@@ -40,11 +40,18 @@ class Navigation extends Component {
    */ 
 
   handleLoginClick(e) {
-    const headers = { "Access-Control-Allow-Origin": "*" }
-    axios.post(config.serverURL + "auth/login")
+    window.location.href = `${config.serverURL}auth/login`
+    /*
+    axios.get(config.serverURL + "auth/login")
     .then((response) => {
-      console.log(response)
+      window.location.href = response.data.url
     })
+    .catch((error) => {
+      console.log("Hello")
+      console.log(error.response)
+      console.log(error.request)
+    })
+    */
   }
 
 

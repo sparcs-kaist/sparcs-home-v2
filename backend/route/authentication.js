@@ -23,9 +23,9 @@ const client = new ssoClient(secretConfig.ssoClientId, secretConfig.ssoSecretKey
  * @desription Handle login
  */
 
-router.post("/login", (req, res) => {
+router.get("/login", (req, res) => {
   const loginParams = client.getLoginParams()
-  res.redirect(301, loginParams.url)
+  res.redirect(loginParams.url)
 })
 
 

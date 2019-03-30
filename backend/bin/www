@@ -46,8 +46,8 @@ db.initiate()
    */
   
   const server = http.createServer(app)
-  log.info("================ Starting SPARCS HOME ================")
-  server.listen(10202, function() {
+  log.info(`================ Starting SPARCS HOME at port ${port} ================`)
+  server.listen(port, function() {
     log.info("Server is running")
   })
   

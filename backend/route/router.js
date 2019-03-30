@@ -26,16 +26,6 @@ router.get("/ping", (req, res) => {
 
 
 /**
- * GET /login/callback
- * @description After user's login, get callback from SSO
- */
-
-router.get("/login/callback", (req, res) => {
-  console.log(req.query)
-})
-
-
-/**
  * Module export
  */ 
 

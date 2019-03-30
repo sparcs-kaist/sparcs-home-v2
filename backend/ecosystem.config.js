@@ -25,7 +25,7 @@ module.exports = {
      * Advanced configuration 
      */ 
     
-    watch: false,
+    watch: true,
 
 
     /**
@@ -62,4 +62,3 @@ module.exports = {
   }]
 
 }
-
