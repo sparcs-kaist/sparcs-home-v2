@@ -31,8 +31,20 @@ router.get("/login", (req, res) => {
 
 /**
  * GET /auth/login/callback
- * TODO : change /login/callback to /auth/login/callback
  */ 
+
+router.get("/login/callback", (req, res) => {
+  // TODO : state check, cookie Hashing
+  client.getUserInfo(req.query.code)
+  .then((response) => {
+    if (response.hasOwnProperty("sparcs_id") === true) {
+      res.cookie(secretConfig.cookieName, JSON.stringify({isSparcs: true}))
+    } else {
+      res.cookie(secretConfig.cookieName, JSON.stringify({isSparcs: false}))
+    }
+    res.redirect(secretConfig.entryPoint)
+  })
+})
 
 
 /**

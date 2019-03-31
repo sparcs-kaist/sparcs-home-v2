@@ -2,15 +2,42 @@ import React, { Component } from "react"
 import logo from "./../../static/logo-1@3x.png"
 import axios from "axios"
 import { config } from "../../config/config"
-
+import { Cookies } from "react-cookie"
 
 class Navigation extends Component {
 
   constructor (props) {
     super(props)
 
+    // Handle state
+    let isLogin = false
+    let isSparcs = false
+
+    const cookies = new Cookies()
+    const cookie = cookies.get(config.cookieName)
+    if (cookie && cookie.hasOwnProperty("isSparcs") === true) {
+      if (cookie.isSparcs === true) {
+        isLogin = true
+        isSparcs = true
+      } else {
+        isLogin = true
+      }
+    }
+    this.state = {
+      isLogin: isLogin,
+      isSparcs: isSparcs
+    }
     this.handleSparcsLogoClick = this.handleSparcsLogoClick.bind(this)
     this.handleRightMenuClick = this.handleRightMenuClick.bind(this)
+  }
+
+
+  /**
+   * componentDidMount
+   */
+
+  componentDidMount() {
+    console.log(this.state)
   }
 
   // TODO : supplement click event of Logo - sidebar
@@ -24,7 +51,6 @@ class Navigation extends Component {
       document.querySelectorAll('.right.menu .item').forEach((item) => {
         item.classList.remove('active')
       })
-  
       // const width = window.innerWidth
     }
   }
@@ -32,31 +58,29 @@ class Navigation extends Component {
   // TODO : right menu click event?
 
   handleRightMenuClick(e) {
+
   }
 
 
   /**
    * handleLoginClick
+   * @description GET server login API
    */ 
 
   handleLoginClick(e) {
     window.location.href = `${config.serverURL}auth/login`
-    /*
-    axios.get(config.serverURL + "auth/login")
-    .then((response) => {
-      window.location.href = response.data.url
-    })
-    .catch((error) => {
-      console.log("Hello")
-      console.log(error.response)
-      console.log(error.request)
-    })
-    */
   }
 
 
-  // TODO : Login / Logout - change word depends on authentication, redirect to login/logout
+  /**
+   * handleLogoutClick
+   * @description Destroy cookies
+   */
 
+  handleLogoutClick(e) {
+    (new Cookies()).remove(config.cookieName)
+    window.location.href = "/aboutus"
+  }
 
   render() {
     return (
@@ -67,7 +91,8 @@ class Navigation extends Component {
           <a href="/seminars" className="item" id="seminars" onClick={this.handleRightMenuClick}>SEMINARS</a>
           <a href="/album" className="item" id="album" onClick={this.handleRightMenuClick}>ALBUM</a>
           <a href="/members" className="item" id="members" onClick={this.handleRightMenuClick}>MEMBERS</a>
-          <div className="item login" onClick={this.handleLoginClick}>LOGIN</div>
+          {this.state.isLogin === false && <div className="item login" onClick={this.handleLoginClick}>LOGIN</div>}
+          {this.state.isLogin === true && <div className="item login" onClick={this.handleLogoutClick}>LOGOUT</div>}
         </div>
 
         <div className="ui container">
@@ -82,7 +107,8 @@ class Navigation extends Component {
             <a href="/seminars" className="item" id="seminars" onClick={this.handleRightMenuClick}>SEMINARS</a>
             <a href="/album" className="item" id="album" onClick={this.handleRightMenuClick}>ALBUM</a>
             <a href="/members" className="item" id="members" onClick={this.handleRightMenuClick}>MEMBERS</a>
-            <div className="item login" onClick={this.handleLoginClick}>LOGIN</div>
+            {this.state.isLogin === false && <div className="item login" onClick={this.handleLoginClick}>LOGIN</div>}
+            {this.state.isLogin === true && <div className="item login" onClick={this.handleLogoutClick}>LOGOUT</div>}
           </div>
           <div className="hamburger">
             <i className="sidebar icon" style={{color: "white"}}></i>

@@ -26,6 +26,7 @@ module.exports = {
      */ 
     
     watch: true,
+    ignore_watch: ["out.log", "error.log"],
 
 
     /**

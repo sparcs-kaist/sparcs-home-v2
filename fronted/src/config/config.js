@@ -2,6 +2,7 @@
 
 module.exports = {
   config: {
-    serverURL: "http://localhost:10202/"
+    serverURL: "http://dev.sparcs.org:10202/",
+    cookieName: "cute-cookie"
   }
 }
