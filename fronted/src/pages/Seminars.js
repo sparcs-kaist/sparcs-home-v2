@@ -8,11 +8,11 @@ import Footer from "./components/Footer"
 import { config } from "../config/config"
 
 const uploadButtonStyle = {
+  backgroundColor: "#db2828",
+  textShadow: "none",
+  borderRadius: "0",
   color: "#fff"
 }
-uploadButtonStyle["background-color"] = "#db2828"
-uploadButtonStyle["text-shadow"] = "none"
-uploadButtonStyle["border-radius"] = "0"
 
 
 /**

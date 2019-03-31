@@ -25,7 +25,8 @@ module.exports = {
      * Advanced configuration 
      */ 
     
-    watch: false,
+    watch: true,
+    ignore_watch: ["out.log", "error.log"],
 
 
     /**
@@ -62,4 +63,3 @@ module.exports = {
   }]
 
 }
-
