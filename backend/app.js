@@ -17,6 +17,7 @@ const express = require("express")
 const cors = require("cors")
 const helmet = require("helmet")
 const morgan = require("morgan")
+const cookieParser = require("cookie-parser")
 const morganConfig = require("@morganConfig").morgan
 
 const app = new express()
@@ -31,6 +32,7 @@ app.use(helmet())
 app.use(express.json({ limit: "5mb" }))
 app.use(express.urlencoded({ extended: false, limit: "5mb" }))
 app.use(path.posix.join("/", "static"), express.static("./tmp"))
+app.use(cookieParser())
 app.use(morgan(morganConfig.stdout.format, morganConfig.stdout.option))
 app.use(morgan(morganConfig.stderr.format, morganConfig.stderr.option))
 

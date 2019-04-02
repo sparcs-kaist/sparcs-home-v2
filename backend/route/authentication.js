@@ -38,7 +38,7 @@ router.get("/login/callback", (req, res) => {
   client.getUserInfo(req.query.code)
   .then((response) => {
     if (response.hasOwnProperty("sparcs_id") === true) {
-      res.cookie(secretConfig.cookieName, JSON.stringify({isSparcs: true}))
+      res.cookie(secretConfig.cookieName, JSON.stringify({isSparcs: true, name: response.sparcs_id}))
     } else {
       res.cookie(secretConfig.cookieName, JSON.stringify({isSparcs: false}))
     }

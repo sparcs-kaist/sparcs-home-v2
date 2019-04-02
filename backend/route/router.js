@@ -21,6 +21,7 @@ const router = express.Router()
  */
 
 router.get("/ping", (req, res) => {
+  console.log(req.cookies)
   res.send("OK")
 })
 

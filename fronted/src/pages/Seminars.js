@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Button, Modal } from "semantic-ui-react"
 import axios from "axios"
+import { Cookies } from "react-cookie"
 
 import "./../styles/seminars.css"
 import Navigation from "./components/Navigation"
@@ -24,7 +25,22 @@ class Seminars extends Component {
   constructor(props) {
     super(props)
 
+    // Handle state
+    let isLogin = false
+    let isSparcs = false
+    const cookies = new Cookies()
+    const cookie = cookies.get(config.cookieName)
+    if (cookie && cookie.hasOwnProperty("isSparcs") === true) {
+      if (cookie.isSparcs === true) {
+        isLogin = true
+        isSparcs = true
+      } else {
+        isLogin = true
+      }
+    }
     this.state = {
+      isLogin: isLogin,
+      isSparcs: isSparcs
     }
 
     this.selectFile = this.selectFile.bind(this)
@@ -100,7 +116,9 @@ class Seminars extends Component {
       }
 
       // POST /seminar
-      axios.post(config.serverURL + "seminar" , seminar)
+      const cookies = new Cookies()
+
+      axios.post(config.serverURL + "seminar" , seminar, { headers: {Authorization: JSON.stringify(cookies.get(config.cookieName))} })
       .then((response) => {
         if (response.data.success) {
           alert("Successfully upload a seminar file")
@@ -124,7 +142,6 @@ class Seminars extends Component {
 
   // TODO upload nodal  컴포넌트로 따로 빼기
   // TODO 세미나 자료 한 줄을 컴포넌트로 따로 빼기
-  // TODO modal style customizing without Warning
 
   // TODO Pagination, category별 찾기, 검색기능
 
@@ -148,14 +165,10 @@ class Seminars extends Component {
             <a href="/seminars" className="yellow item" >Etc.</a>
 
 
-            <div className="ui small search right item">
-              <div className="ui icon input">
-                <input className="prompt" placeholder="Search slides..." />
-                <i className="search icon"></i>
-              </div>
-            </div>
+            <div className="ui small search right item blank"> </div>
 
-            <Modal trigger={<Button style={uploadButtonStyle}>Upload</Button>}>
+            
+            { this.state.isSparcs && <Modal trigger={<Button style={uploadButtonStyle}>Upload</Button>}>
               <Modal.Header>Upload a seminar</Modal.Header>
               <Modal.Content>
 
@@ -190,7 +203,7 @@ class Seminars extends Component {
                 </div>
 
               </Modal.Content>
-            </Modal>
+            </Modal>}
 
           </div>
         </div>
