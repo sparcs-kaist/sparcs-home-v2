@@ -16,7 +16,6 @@ const router = express.Router()
 const path = require("path")
 const fs = require("fs")
 const AWS = require("aws-sdk")
-const util = require("util")
 
 
 /**
@@ -37,12 +36,9 @@ router.post("", (req, res) => {
  
   // Validate authorization with cookie
   const cookie = JSON.parse(req.get("authorization"))
-  console.log(typeof cookie)
   if (cookie.isSparcs === false) {
     return res.json({ success: false, error: "NOT_AUTHORIZATION" })
   }
-  console.log(cookie.isSparcs)
-  console.log(cookie.name)
 
   // Parse the body
   const { title, speaker, content } = req.body
