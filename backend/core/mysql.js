@@ -77,8 +77,8 @@ class Mysql {
    * @param {Function} callback
    */
 
-  getSeminars(callback) {
-    this.client.select().from(this.seminarTable)
+  getSeminars(order, callback) {
+    this.client.select().from(this.seminarTable).orderBy("id", order)
     .asCallback((error, result) => {
       if (error) {
         callback(error, null)
