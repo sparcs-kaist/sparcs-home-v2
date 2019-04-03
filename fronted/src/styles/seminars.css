@@ -92,3 +92,7 @@
   border-color: #337ab7;
   cursor: default;
 }
+
+.blank:before {
+  width: 0!important;
+}

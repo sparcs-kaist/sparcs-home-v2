@@ -11,7 +11,6 @@ class Navigation extends Component {
     // Handle state
     let isLogin = false
     let isSparcs = false
-
     const cookies = new Cookies()
     const cookie = cookies.get(config.cookieName)
     if (cookie && cookie.hasOwnProperty("isSparcs") === true) {
@@ -26,17 +25,9 @@ class Navigation extends Component {
       isLogin: isLogin,
       isSparcs: isSparcs
     }
+
     this.handleSparcsLogoClick = this.handleSparcsLogoClick.bind(this)
     this.handleRightMenuClick = this.handleRightMenuClick.bind(this)
-  }
-
-
-  /**
-   * componentDidMount
-   */
-
-  componentDidMount() {
-    console.log(this.state)
   }
 
   // TODO : supplement click event of Logo - sidebar

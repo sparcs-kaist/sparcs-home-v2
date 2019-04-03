@@ -34,8 +34,13 @@ const s3 = new AWS.S3({ apiVersion: "2006-03-01" })
 
 router.post("", (req, res) => {
  
-  // TODO : Cookie check
+  // Validate authorization with cookie
+  const cookie = JSON.parse(req.get("authorization"))
+  if (cookie.isSparcs === false) {
+    return res.json({ success: false, error: "NOT_AUTHORIZATION" })
+  }
 
+  // Parse the body
   const { title, speaker, content } = req.body
 
   // Check Input Validation
@@ -43,13 +48,13 @@ router.post("", (req, res) => {
     return res.json({ success: false, error: "TITLE_LENGTH" })
   }
   
-  const utitle = title.replace(" ", "_")
-  const uspeaker = speaker.replace(" ", "_")
-  const fileName = `${uspeaker}_${utitle}_${Date.now()}.pdf`
-
   if (speaker.length > 30) {
     return res.json({ success: false, error: "SPEAKER_LENGTH" })
   }
+
+  const utitle = title.replace(" ", "_")
+  const uspeaker = speaker.replace(" ", "_")
+  const fileName = `${uspeaker}_${utitle}_${Date.now()}.pdf`
 
   // Save information about seminar in DB
   db.createSeminar(utitle, uspeaker, fileName, (error, result) => {
