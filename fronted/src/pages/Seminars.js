@@ -42,7 +42,7 @@ class Seminars extends Component {
     }
     this.state = {
       activePage: 1,
-      index: 0
+      index: 0,
       isLogin: isLogin,
       isSparcs: isSparcs
     }
