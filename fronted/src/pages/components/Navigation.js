@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import logo from "./../../static/logo-1@3x.png"
-import axios from "axios"
 import { config } from "../../config/config"
 import { Cookies } from "react-cookie"
 

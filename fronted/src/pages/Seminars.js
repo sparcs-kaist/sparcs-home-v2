@@ -1,10 +1,12 @@
 import React, { Component } from "react"
 import { Button, Modal } from "semantic-ui-react"
 import axios from "axios"
+import Pagination from "react-js-pagination";
 
 import "./../styles/seminars.css"
 import Navigation from "./components/Navigation"
 import Footer from "./components/Footer"
+import SeminarRows from "./components/SeminarRows"
 import { config } from "../config/config"
 
 const uploadButtonStyle = {
@@ -25,6 +27,8 @@ class Seminars extends Component {
     super(props)
 
     this.state = {
+      activePage: 1,
+      index: 0
     }
 
     this.selectFile = this.selectFile.bind(this)
@@ -38,11 +42,74 @@ class Seminars extends Component {
    */
 
   componentDidMount() {
-    axios.get(config.serverURL + "seminar")
+    axios.get(config.serverURL + "seminar?order=desc")
     .then((response) => {
       this.setState({
-        seminars: response.data.result
+        seminars: response.data.result,
+        totalSeminar: response.data.result.length
       })
+    })
+    this.handleDescClick = this.handleDescClick.bind(this)
+    this.handleAscClick = this.handleAscClick.bind(this)
+  }
+
+
+  /**
+   * handleDescClick
+   */
+
+  handleDescClick(e) {
+    e.preventDefault()
+    const desc = document.getElementById("desc")
+    const asc = document.getElementById("asc")
+    if (desc.classList.contains("active")) {
+      return
+    } else {
+      asc.classList.remove("active")
+      desc.classList.add("active")
+      axios.get(config.serverURL + "seminar?order=desc")
+      .then((response) => {
+        this.setState({
+          seminars: response.data.result,
+          totalSeminar: response.data.result.length
+        })
+      })
+    }
+  }
+
+
+  /**
+   * handleAscClick
+   */
+
+  handleAscClick(e) {
+    e.preventDefault()
+    const desc = document.getElementById("desc")
+    const asc = document.getElementById("asc")
+    if (asc.classList.contains("active")) {
+      return
+    } else {
+      desc.classList.remove("active")
+      asc.classList.add("active")
+      axios.get(config.serverURL + "seminar?order=asc")
+      .then((response) => {
+        this.setState({
+          seminars: response.data.result,
+          totalSeminar: response.data.result.length
+        })
+      })
+    }
+  }
+
+
+  /**
+   * handlePageChange
+   */
+
+  handlePageChange = (pageNumber) => {
+    this.setState({
+      activePage: pageNumber,
+      index: pageNumber-1
     })
   }
 
@@ -123,10 +190,11 @@ class Seminars extends Component {
 
 
   // TODO upload nodal  컴포넌트로 따로 빼기
-  // TODO 세미나 자료 한 줄을 컴포넌트로 따로 빼기
-  // TODO modal style customizing without Warning
 
-  // TODO Pagination, category별 찾기, 검색기능
+
+  /**
+   * Render
+   */ 
 
   render() {
     return (
@@ -142,11 +210,8 @@ class Seminars extends Component {
         <div className="ui inverted large attached menu" id="submenu">
           <div className="ui container">
 
-            <a href="/seminars" className="active yellow item">All</a>
-            <a href="/seminars" className="yellow item" >Freshman</a>
-            <a href="/seminars" className="yellow item" >Wheel</a>
-            <a href="/seminars" className="yellow item" >Etc.</a>
-
+            <a href="/seminars" id="desc" className="active yellow item" onClick={this.handleDescClick}>최신순</a>
+            <a href="/seminars" id="asc" className="yellow item" onClick={this.handleAscClick}>오래된 순</a>
 
             <div className="ui small search right item">
               <div className="ui icon input">
@@ -206,32 +271,21 @@ class Seminars extends Component {
             </tr>
             </thead>
 
-            {this.state.seminars && this.state.seminars.map((seminar, i) => {
-              return (
-                <tbody key={i}>
-                <tr>
-                  <td>{seminar.created_date.substring(0, 10)}</td>
-                  <td>{seminar.title}</td>
-                  <td>
-                    <span>
-                      <a href={config.serverURL + "static/" + seminar.file_name}>
-                        {seminar.file_name.substr(seminar.file_name.length-3 ,3) === "pdf"
-                          ? <i className="file pdf outline black icon"></i>
-                          : <i className="file powerpoint outline black icon"></i>}
-                      </a>
-                    </span>
-                  </td>
-                  <td>
-                    <span className="desktop-only">{seminar.speaker}</span>
-                    <span className="mobile-only">Seminar by <b>{seminar.speaker}</b></span>
-                  </td>
-                </tr>
-                </tbody>
-              )
-            })}
+            {this.state.seminars && <SeminarRows seminars={this.state.seminars.slice(this.state.index * 15, this.state.index * 15 + 15)} />}
 
           </table>
         </div>
+
+        <div className="pagination-wrapper">
+          <Pagination
+            activePage={this.state.activePage}
+            itemsCountPerPage={15}
+            totalItemsCount={this.state.totalSeminar}
+            pageRangeDisplayed={5}
+            onChange={this.handlePageChange}
+          />
+        </div>
+
         <Footer />
       </div>
     )

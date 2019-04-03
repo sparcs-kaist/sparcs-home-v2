@@ -90,8 +90,7 @@ router.post("", (req, res) => {
  */
 
 router.get("", (req, res) => {
-  // TODO : pagination
-  db.getSeminars((error, result) => {
+  db.getSeminars(req.query.order, function (error, result) {
     if (error) {
       return res.json({ success: false, error: error })
     } else {
