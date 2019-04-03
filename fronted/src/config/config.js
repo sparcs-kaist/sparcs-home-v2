@@ -3,6 +3,6 @@
 module.exports = {
   config: {
     serverURL: "http://dev.sparcs.org:10202/",
-    cookieName: "cute-cookie"
+    cookieName: "loginCookie"
   }
 }
