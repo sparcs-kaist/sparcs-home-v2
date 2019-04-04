@@ -35,6 +35,7 @@
     "@router": "route/router",
     "@seminar": "route/seminar",
     "@authentication": "route/authentication",
+    "@project": "route/project",
     "__Util__": "",
     "@portSanitizer": "util/port/portSanitizer",
     "@ssoClient": "util/sso/client"

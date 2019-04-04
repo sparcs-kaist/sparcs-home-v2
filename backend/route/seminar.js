@@ -90,7 +90,7 @@ router.post("", (req, res) => {
 
 
 /**
- * GET /seminars
+ * GET /seminar
  * @description Return seminar lists in DB
  */
 

@@ -42,10 +42,12 @@ app.use(morgan(morganConfig.stderr.format, morganConfig.stderr.option))
 const router = require("@router")
 const seminar = require("@seminar")
 const auth = require("@authentication")
+const project = require("@project")
 
 app.use("/", router)
 app.use("/seminar", seminar)
 app.use("/auth", auth)
+app.use("/project", project)
 
 
 /**

@@ -60,6 +60,7 @@ class Seminars extends Component {
   componentDidMount() {
     axios.get(config.serverURL + "seminar?order=desc")
     .then((response) => {
+      // TODO response fail check
       this.setState({
         seminars: response.data.result,
         totalSeminar: response.data.result.length
@@ -85,6 +86,7 @@ class Seminars extends Component {
       desc.classList.add("active")
       axios.get(config.serverURL + "seminar?order=desc")
       .then((response) => {
+        // TODO response fail check
         this.setState({
           seminars: response.data.result,
           totalSeminar: response.data.result.length
@@ -109,6 +111,7 @@ class Seminars extends Component {
       asc.classList.add("active")
       axios.get(config.serverURL + "seminar?order=asc")
       .then((response) => {
+        // TODO response fail check
         this.setState({
           seminars: response.data.result,
           totalSeminar: response.data.result.length
