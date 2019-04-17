@@ -210,9 +210,6 @@ class Seminars extends Component {
   }
 
 
-  // TODO upload nodal  컴포넌트로 따로 빼기
-
-
   /**
    * Render
    */ 

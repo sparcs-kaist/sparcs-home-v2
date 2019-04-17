@@ -51,6 +51,11 @@ class Mysql {
   }
 
 
+  /*******************************
+   * Create
+   *******************************/
+
+
   /**
    * createSeminar
    * @description Create a seminar row in Mysql
@@ -69,6 +74,30 @@ class Mysql {
       }
     })
   }
+
+
+  /**
+   * createProject
+   * @param {Object} newProject
+   * @param {Function} callback
+   */ 
+
+  createProject(newProject, callback) {
+    console.log(newProject)
+    this.client(this.projectTable).insert(newProject)
+    .asCallback((error, result) => {
+      if (error) {
+        callback(error, null)
+      } else {
+        callback(null, result)
+      }
+    })
+  }
+
+
+  /*******************************
+   * Retrieve
+   *******************************/
 
 
   /**
@@ -105,6 +134,82 @@ class Mysql {
       }
     })
   }
+
+
+  /**
+   * getProjectWithId 
+   * @param {String}  id
+   * @param {Function} callback
+   */
+
+  getProjectWithId(id, callback) {
+    this.client.where({ id: Number(id) }).select().from(this.projectTable)
+    .asCallback((error, result) => {
+      if (error) {
+        callback(error, null)
+      } else {
+        callback(null, result)
+      }
+    })
+  }
+
+
+  /*******************************
+   * Update
+   *******************************/
+
+
+  /**
+   * updateProjectWithId
+   * @description Update project with Id
+   */
+
+  updateProjectWithId(newProject, callback) {
+    const { id, title, pm, explanation, homepage_url, github_url } = newProject
+
+    this.client(this.projectTable).where({ id: Number(id) })
+    .update({
+      title: title,
+      pm: pm,
+      explanation: explanation,
+      homepage_url: homepage_url,
+      github_url: github_url
+    })
+    .asCallback((error, result) => {
+      if (error) {
+        callback(error, null)
+      } else {
+        callback(null, result)
+      }
+    })
+  }
+
+
+  /*******************************
+   * Delete
+   *******************************/
+
+
+  /**
+   * deleteProjectWithId
+   * @description Delete project with Id
+   */
+
+  deleteProjectWithId(id, callback) {
+    this.client(this.projectTable).where({ id: Number(id) }).del()
+    .asCallback((error, result) => {
+      if (error) {
+        callback(error, null)
+      } else {
+        callback(null, result)
+      }
+    })
+  }
+
+
+  /*******************************
+   * Util
+   *******************************/
 
 
   /**
