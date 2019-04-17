@@ -1,25 +1,11 @@
 import React, { Component } from "react"
 import axios from "axios"
 
-import project_icon from "./../static/project-icon.png"
 import "./../styles/projects.css"
 import Navigation from "./components/Navigation"
 import Footer from "./components/Footer"
 import ProjectCard from "./components/ProjectCard"
 import { config } from "../config/config"
-
-const cardDivStyle = {
-  width: "80%",
-  margin: "10%"
-}
-
-const displayInlineStyle = {
-  display: "inline"
-}
-
-const colorBlackStyle = {
-  color: "black"
-}
 
 class Projects extends Component {
 
@@ -66,6 +52,7 @@ class Projects extends Component {
 
             {this.state.projects && this.state.projects.map((project, index) => {
               return <ProjectCard
+                        key={index}
                         title={project.title}
                         pm={project.pm}
                         explanation={project.explanation} 
